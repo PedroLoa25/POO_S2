@@ -17,7 +17,7 @@ public class AsistenciaController {
     private void sumar(){
         double num1 = Double.parseDouble(txtNum1.getText());
         double num2 = Double.parseDouble(txtNum2.getText());
-        double resultado = num1 - num2;
+        double resultado = num1 + num2;
         result.setText(String.valueOf(resultado));
     }
 
