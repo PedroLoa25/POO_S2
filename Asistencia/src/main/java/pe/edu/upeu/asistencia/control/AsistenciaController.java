@@ -1,62 +1,24 @@
 package pe.edu.upeu.asistencia.control;
 
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import org.springframework.stereotype.Controller;
 
-    @Controller
-    public class AsistenciaController {
+@Controller
+public class AsistenciaController {
 
-        @FXML private TextField txtNum1, txtNum2;
-        @FXML private Label result;
+    @FXML private TextField txtNum1, txtNum2;
+    @FXML private Label result;
 
-        @FXML
-        private void sumar(){
-            double num1 = Double.parseDouble(txtNum1.getText());
-            double num2 = Double.parseDouble(txtNum2.getText());
-            double resultado = num1 + num2;
-            result.setText(String.valueOf(resultado));
-        }
-
-        @FXML
-        private void restar(){
-            double num1 = Double.parseDouble(txtNum1.getText());
-            double num2 = Double.parseDouble(txtNum2.getText());
-            double resultado = num1 - num2;
-            result.setText(String.valueOf(resultado));
-        }
-        @FXML
-        private void multiplicar(){
-            double num1 = Double.parseDouble(txtNum1.getText());
-            double num2 = Double.parseDouble(txtNum2.getText());
-            double resultado = num1 * num2;
-            result.setText(String.valueOf(resultado));
-        }
-
-        @FXML
-        private void dividir(){
-            double num1 = Double.parseDouble(txtNum1.getText());
-            double num2 = Double.parseDouble(txtNum2.getText());
-            double resultado = num1 / num2;
-            result.setText(String.valueOf(resultado));
-        }
-
-        @FXML
-        private void potenciar(){
-            double num1 = Double.parseDouble(txtNum1.getText());
-            double num2 = Double.parseDouble(txtNum2.getText());
-            double resultado = Math.pow(num1, num2);
-            result.setText(String.valueOf(resultado));
-        }
-
-        @FXML
-        private void radicalizar(){
-            double num1 = Double.parseDouble(txtNum1.getText());
-            double num2 = Double.parseDouble(txtNum2.getText());
-            double resultado = Math.pow(num1, (1/num2));
-            result.setText(String.valueOf(resultado));
-        }
-
+    @FXML
+    private void sumar(){
+        double num1 = Double.parseDouble(txtNum1.getText());
+        double num2 = Double.parseDouble(txtNum2.getText());
+        double resultado = num1 + num2;
+        result.setText(String.valueOf(resultado));
     }
+
+}
