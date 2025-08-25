@@ -9,5 +9,8 @@
       <TextField fx:id="txtNum2" layoutX="226.0" layoutY="43.0" />
       <Button fx:id="btnSumar" layoutX="409.0" layoutY="43.0" mnemonicParsing="false" onAction="#sumar" text="Sumar" />
       <Label fx:id="result" layoutX="31.0" layoutY="95.0" text="Resultado:" />
+      <Button fx:id="btnRestar" layoutX="515.0" layoutY="43.0" mnemonicParsing="false" onAction="#restar" text="Restar" />
+      <Button fx:id="btnMultiplicar" layoutX="408.0" layoutY="91.0" mnemonicParsing="false" onAction="#multiplicar" text="Multiplicar" />
+      <Button fx:id="btnDividir" layoutX="514.0" layoutY="91.0" mnemonicParsing="false" onAction="#dividir" text="Dividir" />
    </children>
 </AnchorPane>
