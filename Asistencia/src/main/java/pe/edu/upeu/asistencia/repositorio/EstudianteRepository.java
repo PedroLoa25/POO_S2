@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EstudianteRepository {
-    List<Estudiante> estudiantes = new ArrayList<>();
+    protected List<Estudiante> estudiantes = new ArrayList<>();
 
     public List<Estudiante> findAll(){
         estudiantes.add(new Estudiante(
