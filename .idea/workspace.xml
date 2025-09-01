@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b2339ddf-3109-4d8b-a435-8ec34a51600f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Asistencia/src/main/java/pe/edu/upeu/asistencia/control/MainguiController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Asistencia/src/main/resources/fxml/maingui.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Asistencia/src/main/java/pe/edu/upeu/asistencia/AsistenciaApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/Asistencia/src/main/java/pe/edu/upeu/asistencia/AsistenciaApplication.java" afterDir="false" />
-    </list>
+    <list default="true" id="b2339ddf-3109-4d8b-a435-8ec34a51600f" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -128,7 +123,7 @@
       <workItem from="1756611712655" duration="71000" />
       <workItem from="1756612001780" duration="18000" />
       <workItem from="1756684999955" duration="1456000" />
-      <workItem from="1756740360514" duration="6296000" />
+      <workItem from="1756740360514" duration="6751000" />
     </task>
     <servers />
   </component>

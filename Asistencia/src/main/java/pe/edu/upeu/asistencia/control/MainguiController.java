@@ -34,7 +34,11 @@ public class MainguiController {
 
     class MenuItemListener{
         public void handle(ActionEvent e){
-            System.out.println(menuItem1.getText());
+
+            if(e.getSource()==menuItem1){
+                System.out.println(menuItem1.getText());
+            }
+
         }
     }
 
