@@ -40,9 +40,9 @@ public class ParticipanteController {
     public void initialize(){
         cbxCarrera.getItems().addAll(Carrera.values());
         cbxTipoParticipante.getItems().addAll(TipoParticipante.values());
-        // TODO cbxCarrera.getSelectionModel().select(1);
-        // TODO Carrera carrera = cbxCarrera.getSelectionModel().getSelectedItem();
-        // TODO System.out.println(carrera.name());
+        // ? cbxCarrera.getSelectionModel().select(1);
+        // ? Carrera carrera = cbxCarrera.getSelectionModel().getSelectedItem();
+        // ? System.out.println(carrera.name());
         definirColumnas();
         listarParticipantes();
     }
