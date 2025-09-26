@@ -10,7 +10,7 @@ public class ParticipanteServicioImp extends ParticipanteRepository implements P
 
     @Override
     public void save(Participante participante) {
-        participantes.add(participante);
+        super.save(participante);
     }
 
     @Override

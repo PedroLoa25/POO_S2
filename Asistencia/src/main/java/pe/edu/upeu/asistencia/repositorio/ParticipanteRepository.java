@@ -21,6 +21,23 @@ public abstract class ParticipanteRepository {
     PreparedStatement pst = null;
     ResultSet rs = null;
 
+    public void save(Participante p){
+        String sql = "INSERT INTO participante\n" +
+        "(dni, nombre, apellidos, carrera, tipo_participante, estado)\n" +
+        "VALUES(?, ?, ?, ?, ?, 1)";
+        try {
+            pst = con.prepareStatement(sql);
+            pst.setString(1, p.getDni().getValue());
+            pst.setString(2, p.getNombre().getValue());
+            pst.setString(3, p.getApellidos().getValue());
+            pst.setString(4, p.getCarrera().name());
+            pst.setString(5, p.getTipoParticipante().name());
+            pst.executeUpdate();
+        } catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
+
     public List<Participante> findAll(){
         participantes = new ArrayList<>();
         try {
