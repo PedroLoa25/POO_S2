@@ -7,8 +7,8 @@ import java.util.List;
 public interface ParticipanteServicioI {
     void save(Participante participante);
     List<Participante> findAll();
-    Participante update(Participante participante, int index);
-    void delete(int index);
+    Participante update(Participante participante);
+    void delete(String dni);
 
     Participante findbyId(int index);
 }
