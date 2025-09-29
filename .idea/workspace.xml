@@ -4,23 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b2339ddf-3109-4d8b-a435-8ec34a51600f" name="Changes" comment="added">
-      <change afterPath="$PROJECT_DIR$/Asistencia/src/main/java/pe/edu/upeu/asistencia/repositorio/ParticipanteIRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/9a7fc508-b36b-4c1f-aa3b-697aad7c461a.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/9a7fc508-b36b-4c1f-aa3b-697aad7c461a.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/data_source_mapping.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Asistencia/data/asistenciadb.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Asistencia/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Asistencia/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Asistencia/src/main/java/pe/edu/upeu/asistencia/conexion/ConDB.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Asistencia/src/main/java/pe/edu/upeu/asistencia/control/ParticipanteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Asistencia/src/main/java/pe/edu/upeu/asistencia/control/ParticipanteController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Asistencia/src/main/java/pe/edu/upeu/asistencia/modelo/Participante.java" beforeDir="false" afterPath="$PROJECT_DIR$/Asistencia/src/main/java/pe/edu/upeu/asistencia/modelo/Participante.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Asistencia/src/main/java/pe/edu/upeu/asistencia/repositorio/ParticipanteRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Asistencia/src/main/java/pe/edu/upeu/asistencia/servicio/ParticipanteServicioI.java" beforeDir="false" afterPath="$PROJECT_DIR$/Asistencia/src/main/java/pe/edu/upeu/asistencia/servicio/ParticipanteServicioI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Asistencia/src/main/java/pe/edu/upeu/asistencia/servicio/ParticipanteServicioImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/Asistencia/src/main/java/pe/edu/upeu/asistencia/servicio/ParticipanteServicioImp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Asistencia/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Asistencia/src/main/resources/application.properties" afterDir="false" />
-    </list>
+    <list default="true" id="b2339ddf-3109-4d8b-a435-8ec34a51600f" name="Changes" comment="added" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -212,7 +196,7 @@
       <workItem from="1758229239063" duration="4000" />
       <workItem from="1758915183655" duration="214000" />
       <workItem from="1758915660222" duration="3330000" />
-      <workItem from="1759168252961" duration="407000" />
+      <workItem from="1759168252961" duration="790000" />
     </task>
     <task id="LOCAL-00001" summary="added">
       <option name="closed" value="true" />
