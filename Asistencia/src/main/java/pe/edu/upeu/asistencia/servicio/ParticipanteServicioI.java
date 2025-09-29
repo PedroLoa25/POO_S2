@@ -9,6 +9,5 @@ public interface ParticipanteServicioI {
     List<Participante> findAll();
     Participante update(Participante participante);
     void delete(String dni);
-
-    Participante findbyId(int index);
+    Participante findById(String dni);
 }

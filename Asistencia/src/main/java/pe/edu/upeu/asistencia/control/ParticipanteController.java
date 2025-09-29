@@ -59,12 +59,12 @@ public class ParticipanteController {
     @FXML
     public void registrarParticipante(){
         Participante p = new Participante();
-        p.setDni(new SimpleStringProperty(txtDni.getText()));
-        p.setNombre(new SimpleStringProperty(txtNombres.getText()));
-        p.setApellidos(new SimpleStringProperty(txtApellidos.getText()));
+        p.setDni(txtDni.getText());
+        p.setNombre(txtNombres.getText());
+        p.setApellidos(txtApellidos.getText());
         p.setCarrera(cbxCarrera.getSelectionModel().getSelectedItem());
         p.setTipoParticipante(cbxTipoParticipante.getSelectionModel().getSelectedItem());
-        p.setEstado(new SimpleBooleanProperty(true));
+        p.setEstado(true);
         if (indexEdit == -1) {
             ps.save(p);
         }
@@ -88,9 +88,9 @@ public class ParticipanteController {
     }
 
     public void listarParticipantes(){
-        dniCol.setCellValueFactory(cellData -> cellData.getValue().getDni());
-        nombreCol.setCellValueFactory(cellData -> cellData.getValue().getNombre());
-        apellidosCol.setCellValueFactory(cellData -> cellData.getValue().getApellidos());
+        dniCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDni()));
+        nombreCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
+        apellidosCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getApellidos()));
         carreraCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCarrera().toString()));
         tipoParticipanteCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTipoParticipante().name()));
         agregarAccionesButton();
@@ -104,9 +104,9 @@ public class ParticipanteController {
     }
 
     public void editarParticipante(Participante p, int index) {
-        txtDni.setText(p.getDni().getValue());
-        txtNombres.setText(p.getNombre().getValue());
-        txtApellidos.setText(p.getApellidos().getValue());
+        txtDni.setText(p.getDni());
+        txtNombres.setText(p.getNombre());
+        txtApellidos.setText(p.getApellidos());
         cbxCarrera.getSelectionModel().select(p.getCarrera());
         cbxTipoParticipante.getSelectionModel().select(p.getTipoParticipante());
         indexEdit = index;
@@ -124,7 +124,7 @@ public class ParticipanteController {
                 });
                 btnDelete.setOnAction(event -> {
                     Participante p = getTableView().getItems().get(getIndex());
-                    eliminarParticipante(p.getDni().getValue());
+                    eliminarParticipante(p.getDni());
                 });
             }
             @Override
