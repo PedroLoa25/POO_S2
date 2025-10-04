@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b2339ddf-3109-4d8b-a435-8ec34a51600f" name="Changes" comment="Pulido 2">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="b2339ddf-3109-4d8b-a435-8ec34a51600f" name="Changes" comment="Pulido 2" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -207,7 +205,7 @@
       <workItem from="1759333747615" duration="538000" />
       <workItem from="1759334389788" duration="5000" />
       <workItem from="1759516328393" duration="6906000" />
-      <workItem from="1759554320382" duration="1467000" />
+      <workItem from="1759554320382" duration="1845000" />
     </task>
     <task id="LOCAL-00001" summary="added">
       <option name="closed" value="true" />
@@ -233,7 +231,15 @@
       <option name="project" value="LOCAL" />
       <updated>1759554762264</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Pulido 2">
+      <option name="closed" value="true" />
+      <created>1759555824988</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1759555824988</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
