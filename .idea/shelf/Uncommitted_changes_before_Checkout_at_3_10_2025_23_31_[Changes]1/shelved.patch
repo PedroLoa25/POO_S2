@@ -1,0 +1,17 @@
+Index: .idea/data_source_mapping.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/data_source_mapping.xml b/.idea/data_source_mapping.xml
+deleted file mode 100644
+--- a/.idea/data_source_mapping.xml	(revision 10ce0724bd89f9ea9a80cb6d720fc19ed6fb3176)
++++ /dev/null	(revision 10ce0724bd89f9ea9a80cb6d720fc19ed6fb3176)
+@@ -1,6 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="DataSourcePerFileMappings">
+-    <file url="file://$APPLICATION_CONFIG_DIR$/consoles/db/e2e6ed20-2325-427b-a5b3-10064cc951c3/console.sql" value="e2e6ed20-2325-427b-a5b3-10064cc951c3" />
+-  </component>
+-</project>
+\ No newline at end of file
