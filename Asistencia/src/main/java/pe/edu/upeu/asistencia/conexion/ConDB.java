@@ -8,7 +8,7 @@ public class ConDB {
     public static Connection getConexion(){
         try {
             Class.forName("org.sqlite.JDBC");
-            String url = "jdbc:sqlite:Asistencia/data/asistenciadb.db?foreign_keys=on";
+            String url = "jdbc:sqlite:data/asistenciadb.db?foreign_keys=on";
             if (conexion == null){
                 conexion = DriverManager.getConnection(url);
             }
