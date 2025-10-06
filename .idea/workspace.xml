@@ -94,10 +94,11 @@
       <recent name="C:\Users\pfloa\PedroProjects\MyRepositories\POO_S2\Asistencia\src\main\resources" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Application">
-    <configuration name="Application" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="pe.edu.upeu.asistencia.Application" />
+  <component name="RunManager" selected="Application.Aplicacion">
+    <configuration name="Aplicacion" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="pe.edu.upeu.asistencia.Aplicacion" />
       <module name="Asistencia" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Asistencia" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="pe.edu.upeu.asistencia.*" />
@@ -128,13 +129,18 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.ConDB" />
+      <item itemvalue="Application.Aplicacion" />
+      <item itemvalue="Spring Boot.AsistenciaApplication" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Application" />
+        <item itemvalue="Application.Aplicacion" />
         <item itemvalue="Application.ConDB" />
         <item itemvalue="Application.ConDB" />
-        <item itemvalue="Application.Application" />
-        <item itemvalue="Application.Application" />
+        <item itemvalue="Application.Aplicacion" />
+        <item itemvalue="Application.Aplicacion" />
       </list>
     </recent_temporary>
   </component>
