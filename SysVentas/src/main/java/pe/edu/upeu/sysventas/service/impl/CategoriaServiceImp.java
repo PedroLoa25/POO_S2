@@ -13,6 +13,7 @@ import pe.edu.upeu.sysventas.service.ICategoriaService;
 @Service
 public class CategoriaServiceImp extends CrudGenericServiceImp<Categoria, Long> implements ICategoriaService {
     private final CategoriaRepository categoriaRepository;
+
     @Override
     protected ICrudGenericRepository<Categoria, Long> getRepo() {
         return categoriaRepository;
