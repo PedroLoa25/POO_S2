@@ -35,8 +35,9 @@ import java.util.stream.Collectors;
 @Controller
 public class ProductoController {
     @FXML
-    TextField txtNombreProducto, txtPUnit, txtPUnitOld,
-            txtUtilidad, txtStock, txtStockOld, txtFiltroDato;
+    TextField txtNombreProducto, txtPUnit,
+            txtPUnitOld, txtUtilidad,
+            txtStock, txtStockOld, txtFiltroDato;
     @FXML
     ComboBox<ComboBoxOption> cbxMarca;
     @FXML

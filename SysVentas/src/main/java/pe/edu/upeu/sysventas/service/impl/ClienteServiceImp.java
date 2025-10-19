@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import pe.edu.upeu.sysventas.dto.ModeloDataAutocomplet;
+import pe.edu.upeu.sysventas.dto.ModeloDataAutocomplete;
 import pe.edu.upeu.sysventas.model.Cliente;
 import pe.edu.upeu.sysventas.repository.ClienteRepository;
 import pe.edu.upeu.sysventas.repository.ICrudGenericRepository;
@@ -26,11 +26,11 @@ public class ClienteServiceImp extends CrudGenericServiceImp<Cliente,String> imp
     }
 
     @Override
-    public List<ModeloDataAutocomplet> listAutoCompletCliente() {
-        List<ModeloDataAutocomplet> listarclientes = new ArrayList<>();
+    public List<ModeloDataAutocomplete> listAutoCompletCliente() {
+        List<ModeloDataAutocomplete> listarclientes = new ArrayList<>();
         try {
             for (Cliente cliente : clienteRepository.findAll()) {
-                ModeloDataAutocomplet data = new ModeloDataAutocomplet();
+                ModeloDataAutocomplete data = new ModeloDataAutocomplete();
                 data.setIdx(cliente.getDniruc());
                 data.setNameDysplay(cliente.getNombres());
                 data.setOtherData(cliente.getTipoDocumento().name());

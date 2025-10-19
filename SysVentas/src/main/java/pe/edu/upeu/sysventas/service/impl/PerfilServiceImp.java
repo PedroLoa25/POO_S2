@@ -10,7 +10,6 @@ import pe.edu.upeu.sysventas.service.IPerfilService;
 @RequiredArgsConstructor
 @Service
 public class PerfilServiceImp extends CrudGenericServiceImp<Perfil, Long> implements IPerfilService {
-
     private final PerfilRepository perfilRepository;
 
     @Override

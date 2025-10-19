@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class ModeloDataAutocomplet {
+public class ModeloDataAutocomplete {
     String idx;
     String nameDysplay;
     String otherData;

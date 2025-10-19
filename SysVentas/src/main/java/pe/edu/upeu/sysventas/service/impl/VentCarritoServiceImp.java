@@ -15,20 +15,21 @@ import java.util.List;
 @Service
 public class VentCarritoServiceImp extends CrudGenericServiceImp<VentaCarrito, Long> implements IVentaCarritoService {
 
-    private final VentaCarritoRepository carritoRepository;
+    private final VentaCarritoRepository ventaCarritoRepository;
+
     @Override
     protected ICrudGenericRepository<VentaCarrito, Long> getRepo() {
-        return carritoRepository;
+        return ventaCarritoRepository;
     }
 
     @Override
     public List<VentaCarrito> listaCarritoCliente(String dni) {
-        return carritoRepository.listaCarritoCliente(dni);
+        return ventaCarritoRepository.listaCarritoCliente(dni);
     }
 
     @Transactional
     @Override
     public void deleteCarAll(String dniruc) {
-        carritoRepository.deleteByDniruc(dniruc);
+        ventaCarritoRepository.deleteByDniruc(dniruc);
     }
 }

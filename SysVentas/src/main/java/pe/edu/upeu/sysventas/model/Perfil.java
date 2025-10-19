@@ -1,6 +1,7 @@
 package pe.edu.upeu.sysventas.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
@@ -12,9 +13,8 @@ public class Perfil {
     @Basic(optional = false)
     @Column(name = "id_perfil", nullable = false)
     private Long idPerfil;
-    //@Size(max = 20)
+    @Size(max = 20)
     private String nombre;
-    //@Size(max = 6)
+    @Size(max = 6)
     private String codigo;
 }
-

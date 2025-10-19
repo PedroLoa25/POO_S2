@@ -35,16 +35,16 @@ public abstract class CrudGenericServiceImp<T, ID> implements ICrudGenericServic
     }
 
     @Override
-    public void delete(T t) {
-        getRepo().delete(t);
+    public void delete(ID id) {
+        getRepo().deleteById(id);
     }
 
-    @Override
+    /*@Override
     public void deleteById(ID id) {
         if(!getRepo().existsById(id)){
             throw new ModelNotFoundException("ID NOT FOUND" + id);
         }
         getRepo().deleteById(id);
         //getRepo().findById(id).orElseThrow(() -> new ModelNotFoundException("ID NOT FOUND" + id));
-    }
+    }*/
 }

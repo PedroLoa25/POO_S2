@@ -1,5 +1,6 @@
 package pe.edu.upeu.sysventas.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -42,13 +43,13 @@ public class Compra {
     private String serie;
     @Column(name = "num_doc", nullable = false, length = 20)
     private String numDoc;
-    //@JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
     @Column(name = "fecha_comp", nullable = false)
     private LocalDate fechaComp;
     @Column(name = "tipo_doc", nullable = false, length = 12)
     private String tipoDoc;
-    //@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Column(name = "fecha_reg", nullable = false)
     private LocalDateTime fechaReg;
     @OneToMany(mappedBy = "compra", cascade = CascadeType.ALL,
