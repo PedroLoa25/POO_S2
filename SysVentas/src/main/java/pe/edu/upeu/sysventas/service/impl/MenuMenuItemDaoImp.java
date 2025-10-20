@@ -2,12 +2,12 @@ package pe.edu.upeu.sysventas.service.impl;
 
 import org.springframework.stereotype.Service;
 import pe.edu.upeu.sysventas.dto.MenuMenuItemDto;
-import pe.edu.upeu.sysventas.service.IMenuMenuItemDto;
+import pe.edu.upeu.sysventas.service.IMenuMenuItemDao;
 
 import java.util.*;
 
 @Service
-public class MenuMenuItemDtoImp implements IMenuMenuItemDto {
+public class MenuMenuItemDaoImp implements IMenuMenuItemDao {
     @Override
     public List<MenuMenuItemDto> listaAccesos(String perfil, Properties idioma) {
         List<MenuMenuItemDto> lista = new ArrayList<>();
@@ -23,7 +23,9 @@ public class MenuMenuItemDtoImp implements IMenuMenuItemDto {
         lista.add(new MenuMenuItemDto("miventa", "/view/main_venta.fxml",
                         "Venta", "Reg. Venta",
                         "Gestionar Ventas", "T"));
+
         List<MenuMenuItemDto> accesoReal = new ArrayList<>();
+
         accesoReal.add(lista.get(0));
         switch (perfil) {
             case "Administrador":

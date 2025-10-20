@@ -15,7 +15,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import pe.edu.upeu.sysventas.dto.MenuMenuItemDto;
 import pe.edu.upeu.sysventas.dto.SessionManager;
-import pe.edu.upeu.sysventas.service.IMenuMenuItemDto;
+import pe.edu.upeu.sysventas.service.IMenuMenuItemDao;
 import pe.edu.upeu.sysventas.utils.UtilsX;
 
 import java.io.IOException;
@@ -32,7 +32,7 @@ public class MainGuiController {
     UtilsX util = new UtilsX();
     Properties myresources = new Properties();
     @Autowired
-    IMenuMenuItemDto mmiDao;
+    IMenuMenuItemDao mmiDao;
     @FXML
     private TabPane tabPaneFx;
     List<MenuMenuItemDto> lista;
