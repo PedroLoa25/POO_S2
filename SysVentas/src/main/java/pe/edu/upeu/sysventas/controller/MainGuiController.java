@@ -28,11 +28,14 @@ import java.util.prefs.Preferences;
 public class MainGuiController {
     @Autowired
     private ApplicationContext context;
-    Preferences userPrefs = Preferences.userRoot();
     UtilsX util = new UtilsX();
+
+    Preferences userPrefs = Preferences.userRoot();
     Properties myresources = new Properties();
+
     @Autowired
     IMenuMenuItemDao mmiDao;
+
     @FXML
     private TabPane tabPaneFx;
     List<MenuMenuItemDto> lista;
@@ -55,6 +58,15 @@ public class MainGuiController {
             ) );
     CustomMenuItem customItem = new CustomMenuItem(comboBox);
 
+
+    private Menu menuIdioma=new Menu("Idioma");
+    ComboBox<String> comboBoxIdioma = new ComboBox<>(
+            javafx.collections.FXCollections.observableArrayList(
+                    "Español",
+                    "Ingles"
+            ) );
+    CustomMenuItem customItemIdioma = new CustomMenuItem(comboBoxIdioma);
+
     class MenuListener{
         public void menuSelected(Event e){
             if (((Menu) e.getSource()).getId().equals("mmiver1")) {
@@ -64,10 +76,13 @@ public class MainGuiController {
     }
 
     class MenuItemListener{
+
         Map<String, String[]> menuConfig;
+
         MenuItemListener(){
             menuConfig = mmiDao.accesosAutorizados(lista);
         }
+
         public void handle(ActionEvent e){
             String id = ((MenuItem) e.getSource()).getId();
             System.out.println("Menu seleccionado: " + id);
@@ -80,6 +95,7 @@ public class MainGuiController {
                 }
             }
         }
+
         private void abrirTabConFXML(String fxmlPath, String tituloTab) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
@@ -95,11 +111,12 @@ public class MainGuiController {
                 throw new RuntimeException("Error al cargar FXML: " + fxmlPath, e);
             }
         }
+
+
         private void redireccionar(String fxmlPath){
             tabPaneFx.getTabs().clear();
             try {
-                FXMLLoader fxmlLoader = new
-                        FXMLLoader(getClass().getResource(fxmlPath));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlPath));
                 fxmlLoader.setControllerFactory(context::getBean);
                 parent= fxmlLoader.load();
                 Scene scene = new Scene(parent);
@@ -123,19 +140,15 @@ public class MainGuiController {
         escena.getStylesheets().clear();
         switch (estiloSeleccionado) {
             case "Estilo Oscuro":
-
                 escena.getStylesheets().add(getClass().getResource("/css/estilo-oscuro.css").toExternalForm());
                 break;
             case "Estilo Azul":
-
                 escena.getStylesheets().add(getClass().getResource("/css/estilo-azul.css").toExternalForm());
                 break;
             case "Estilo Verde":
-
                 escena.getStylesheets().add(getClass().getResource("/css/estilo-verde.css").toExternalForm());
                 break;
             case "Estilo Rosado":
-
                 escena.getStylesheets().add(getClass().getResource("/css/estilo-rosado.css").toExternalForm());
                 break;
             default: break;
@@ -157,15 +170,13 @@ public class MainGuiController {
         return new int[]{menui, menuitem};
     }
 
-    @FXML
-    public void initialize() {
-        Platform.runLater(() -> {
-            stage = (Stage) tabPaneFx.getScene().getWindow();
-            System.out.println("El título del stage es: " + stage.getTitle());
-        });
+    private List<MenuMenuItemDto> listaAccesos() {
         myresources = util.detectLanguage(userPrefs.get("IDIOMAX", "es"));
-        lista = mmiDao.listaAccesos(SessionManager.getInstance().getUserPerfil(),
+        return mmiDao.listaAccesos(SessionManager.getInstance().getUserPerfil(),
                 myresources);
+    }
+    private void graficarMenus(){
+        lista = listaAccesos();
         int[] mmi = contarMenuMunuItem(lista);
         Menu[] menu = new Menu[mmi[0]];
         MenuItem[] menuItem = new MenuItem[mmi[1]];
@@ -208,8 +219,40 @@ public class MainGuiController {
         menuEstilo.getItems().clear();
         menuEstilo.getItems().add(customItem);
         menuBarFx.getMenus().addAll(menuEstilo);
-        // Layout principal
+        comboBoxIdioma.setOnAction(e -> cambiarIdioma());
+        customItemIdioma.setHideOnClick(false);
+        menuIdioma.getItems().clear();
+        menuIdioma.getItems().add(customItemIdioma);
+        menuBarFx.getMenus().addAll(menuIdioma);
         bp.setTop(menuBarFx);
+    }
+
+
+    @FXML
+    private void cambiarIdioma() {
+        String idiomaSeleccionado =
+                comboBoxIdioma.getSelectionModel().getSelectedItem();
+        switch (idiomaSeleccionado) {
+            case "Español":
+                userPrefs.put("IDIOMAX", "es");
+                break;
+            case "Ingles":
+                userPrefs.put("IDIOMAX", "en");
+                break;
+            default: userPrefs.put("IDIOMAX", "es"); break;
+        }
+        System.out.println("Cambiando idioma a: " + idiomaSeleccionado);
+        graficarMenus();
+    }
+
+    @FXML
+    public void initialize() {
+        Platform.runLater(() -> {
+            stage = (Stage) tabPaneFx.getScene().getWindow();
+            System.out.println("El título del stage es: " + stage.getTitle());
+        });
+        graficarMenus();
+        // Layout principal
         bp.setCenter(tabPaneFx);
     }
 }

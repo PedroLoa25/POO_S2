@@ -12,7 +12,7 @@ public class MenuMenuItemDaoImp implements IMenuMenuItemDao {
     public List<MenuMenuItemDto> listaAccesos(String perfil, Properties idioma) {
         List<MenuMenuItemDto> lista = new ArrayList<>();
         lista.add(new MenuMenuItemDto("miprincipal", "/view/login.fxml",
-                "Principal", "Salir",
+                idioma.getProperty("menu.nombre.principal"), idioma.getProperty("menuitem.nombre.salir"),
                 "Salir", "S"));
         lista.add(new MenuMenuItemDto("miproducto", "/view/main_producto.fxml",
                 "Producto", "Adm. Producto",
