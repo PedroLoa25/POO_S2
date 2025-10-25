@@ -160,8 +160,6 @@ public class MainGuiController {
         Menu[] menu = new Menu[mmi[0]];
         MenuItem[] menuItem = new MenuItem[mmi[1]];
         menuBarFx = new MenuBar();
-        menuEstilo.setText(myresources.getProperty("menu.nombre.estilo", "Cambiar Estilo"));
-        menuIdioma.setText(myresources.getProperty("menu.nombre.idioma", "Idioma"));
         MenuItemListener d = new MenuItemListener();
         MenuListener m = new MenuListener();
         String menuN = "";
