@@ -49,7 +49,7 @@ public class MenuMenuItemDaoImp implements IMenuMenuItemDao {
     public Map<String, String[]> accesosAutorizados(List<MenuMenuItemDto> accesos) {
         Map<String, String[]> menuConfig = new HashMap<>();
         for (MenuMenuItemDto menu : accesos) {
-            menuConfig.put("mi"+menu.getIdNombreObj(), new String[]{menu.getRutaFile(),
+            menuConfig.put(menu.getIdNombreObj(), new String[]{menu.getRutaFile(),
                     menu.getNombreTab(),menu.getTipoTab()});
         }
         return menuConfig;

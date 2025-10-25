@@ -3,10 +3,8 @@ package pe.edu.upeu.sysventas.controller;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -15,10 +13,10 @@ import javafx.scene.image.Image;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import pe.edu.upeu.sysventas.components.StageManager;
 import pe.edu.upeu.sysventas.components.Toast;
+import pe.edu.upeu.sysventas.components.ViewNavigator;
 import pe.edu.upeu.sysventas.dto.SessionManager;
 import pe.edu.upeu.sysventas.model.Usuario;
 import pe.edu.upeu.sysventas.service.IUsuarioService;
@@ -28,9 +26,9 @@ import java.io.IOException;
 @Controller
 public class LoginController {
     @Autowired
-    private ApplicationContext context;
-    @Autowired
     IUsuarioService us;
+    @Autowired
+    private ViewNavigator viewNavigator;
     @FXML
     TextField txtUsuario;
     @FXML
@@ -57,15 +55,9 @@ public class LoginController {
                 SessionManager.getInstance().setUserName(usu.getUser());
 
                 SessionManager.getInstance().setUserPerfil(usu.getIdPerfil().getNombre());
-                FXMLLoader loader = new
-                        FXMLLoader(getClass().getResource("/view/maingui.fxml"));
-                loader.setControllerFactory(context::getBean);
-                Parent mainRoot = loader.load();
                 Screen screen = Screen.getPrimary();
                 Rectangle2D bounds = screen.getBounds();
-                Scene mainScene = new Scene(mainRoot,bounds.getWidth(),
-                        bounds.getHeight()-30);
-
+                Scene mainScene = viewNavigator.createScene(ViewNavigator.ViewId.MAIN_GUI);
                 mainScene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
                 Stage stage = (Stage) ((Node)
                         event.getSource()).getScene().getWindow();

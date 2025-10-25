@@ -4,21 +4,18 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
+import pe.edu.upeu.sysventas.components.ViewNavigator;
 import pe.edu.upeu.sysventas.dto.MenuMenuItemDto;
 import pe.edu.upeu.sysventas.dto.SessionManager;
 import pe.edu.upeu.sysventas.service.IMenuMenuItemDao;
 import pe.edu.upeu.sysventas.utils.UtilsX;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -27,7 +24,7 @@ import java.util.prefs.Preferences;
 @Controller
 public class MainGuiController {
     @Autowired
-    private ApplicationContext context;
+    private ViewNavigator viewNavigator;
     UtilsX util = new UtilsX();
 
     Preferences userPrefs = Preferences.userRoot();
@@ -43,7 +40,6 @@ public class MainGuiController {
     private BorderPane bp;
     @FXML
     private MenuBar menuBarFx;
-    private Parent parent;
     Stage stage;
 
     @FXML
@@ -97,38 +93,20 @@ public class MainGuiController {
         }
 
         private void abrirTabConFXML(String fxmlPath, String tituloTab) {
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-                loader.setControllerFactory(context::getBean); // Inyección con Spring
-                Parent root = loader.load();
-                ScrollPane scrollPane = new ScrollPane(root);
-                scrollPane.setFitToWidth(true);
-                scrollPane.setFitToHeight(true);
-                Tab newTab = new Tab(tituloTab, scrollPane);
-                tabPaneFx.getTabs().clear(); // si quieres siempre limpiar
-                tabPaneFx.getTabs().add(newTab);
-            } catch (IOException e) {
-                throw new RuntimeException("Error al cargar FXML: " + fxmlPath, e);
-            }
+            Tab newTab = viewNavigator.createTab(tituloTab, fxmlPath, true);
+            tabPaneFx.getTabs().clear(); // si quieres siempre limpiar
+            tabPaneFx.getTabs().add(newTab);
         }
 
 
         private void redireccionar(String fxmlPath){
             tabPaneFx.getTabs().clear();
-            try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlPath));
-                fxmlLoader.setControllerFactory(context::getBean);
-                parent= fxmlLoader.load();
-                Scene scene = new Scene(parent);
-                stage.sizeToScene();
-                stage.setScene(scene);
-                stage.centerOnScreen();
-                stage.setTitle("SysVentas SysCenterLife");
-                stage.setResizable(false);
-                stage.show();
-            }catch (Exception ex){
-                throw new RuntimeException(ex);
-            }
+            viewNavigator.setScene(fxmlPath, stage);
+            stage.sizeToScene();
+            stage.centerOnScreen();
+            stage.setTitle("SysVentas SysCenterLife");
+            stage.setResizable(false);
+            stage.show();
         }
     }
 
@@ -195,7 +173,7 @@ public class MainGuiController {
                 menu[menui].setOnShowing(m::menuSelected);
                 if (!mmix.getMenuitemnombre().equals("")) {
                     menuItem[menuitem] = new MenuItem(mmix.getMenuitemnombre());
-                    menuItem[menuitem].setId("mi" + mmix.getIdNombreObj());
+                    menuItem[menuitem].setId(mmix.getIdNombreObj());
                     menuItem[menuitem].setOnAction(d::handle);
                     menu[menui].getItems().add(menuItem[menuitem]);
                     menuitem++;
@@ -210,7 +188,7 @@ public class MainGuiController {
             if (!mmix.getMenuitemnombre().equals("") &&
                     mmix.getMenunombre().equals(menuN) && conti == 'S') {
                 menuItem[menuitem] = new MenuItem(mmix.getMenuitemnombre());
-                menuItem[menuitem].setId("mi" + mmix.getIdNombreObj());
+                menuItem[menuitem].setId(mmix.getIdNombreObj());
                 menuItem[menuitem].setOnAction(d::handle);
                 menu[menui - 1].getItems().add(menuItem[menuitem]);
                 menuitem++;
