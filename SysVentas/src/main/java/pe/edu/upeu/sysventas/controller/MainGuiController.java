@@ -85,23 +85,23 @@ public class MainGuiController {
             if (menuConfig.containsKey(id)) {
                 String[] cfg = menuConfig.get(id);
                 if(cfg[2].equals("S") ){
-                    redireccionar(cfg[0]);
+                    redireccionar(id);
                 }else {
-                    abrirTabConFXML(cfg[0], cfg[1]);
+                    abrirTabConFXML(id, cfg[1]);
                 }
             }
         }
 
-        private void abrirTabConFXML(String fxmlPath, String tituloTab) {
-            Tab newTab = viewNavigator.createTab(tituloTab, fxmlPath, true);
+        private void abrirTabConFXML(String viewKey, String tituloTab) {
+            Tab newTab = viewNavigator.createRegisteredTab(viewKey, tituloTab, true);
             tabPaneFx.getTabs().clear(); // si quieres siempre limpiar
             tabPaneFx.getTabs().add(newTab);
         }
 
 
-        private void redireccionar(String fxmlPath){
+        private void redireccionar(String viewKey){
             tabPaneFx.getTabs().clear();
-            viewNavigator.setScene(fxmlPath, stage);
+            viewNavigator.setRegisteredScene(viewKey, stage);
             stage.sizeToScene();
             stage.centerOnScreen();
             stage.setTitle("SysVentas SysCenterLife");
@@ -155,6 +155,7 @@ public class MainGuiController {
     }
     private void graficarMenus(){
         lista = listaAccesos();
+        lista.forEach(m -> viewNavigator.register(m.getIdNombreObj(), m.getRutaFile()));
         int[] mmi = contarMenuMunuItem(lista);
         Menu[] menu = new Menu[mmi[0]];
         MenuItem[] menuItem = new MenuItem[mmi[1]];

@@ -14,7 +14,6 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import pe.edu.upeu.sysventas.components.StageManager;
 import pe.edu.upeu.sysventas.components.Toast;
 import pe.edu.upeu.sysventas.components.ViewNavigator;
 import pe.edu.upeu.sysventas.dto.SessionManager;
@@ -67,7 +66,6 @@ public class LoginController {
                 stage.setX(bounds.getMinX());
                 stage.setY(bounds.getMinY());
                 stage.setResizable(true);
-                StageManager.setPrimaryStage(stage);
                 stage.setWidth(bounds.getWidth());
                 stage.setHeight(bounds.getHeight());
                 stage.show();

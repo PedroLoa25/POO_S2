@@ -6,17 +6,20 @@ import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.stage.Stage;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.Map;
+import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Component
 public class ViewNavigator {
 
     private final ApplicationContext context;
+    private final Map<String, String> viewRegistry = new ConcurrentHashMap<>();
 
     public ViewNavigator(ApplicationContext context) {
         this.context = context;
@@ -51,6 +54,7 @@ public class ViewNavigator {
         } else {
             scene.setRoot(load(fxmlPath));
         }
+        StageManager.setPrimaryStage(stage);
     }
 
     public void setScene(ViewId view, Stage stage) {
@@ -68,11 +72,34 @@ public class ViewNavigator {
         return new Tab(titulo, content);
     }
 
-    /*@AllArgsConstructor
-    @Getter*/
+    public void register(String viewKey, String fxmlPath) {
+        viewRegistry.put(viewKey, fxmlPath);
+    }
+
+    public Parent loadRegistered(String viewKey) {
+        return load(resolveRegisteredPath(viewKey));
+    }
+
+    public Tab createRegisteredTab(String viewKey, String titulo, boolean wrapWithScroll) {
+        return createTab(titulo, resolveRegisteredPath(viewKey), wrapWithScroll);
+    }
+
+    public void setRegisteredScene(String viewKey, Stage stage) {
+        setScene(resolveRegisteredPath(viewKey), stage);
+    }
+
+    private String resolveRegisteredPath(String viewKey) {
+        return Optional.ofNullable(viewRegistry.get(viewKey))
+                .orElseThrow(() -> new IllegalArgumentException("Vista no registrada: " + viewKey));
+    }
+
+    @Getter
     public enum ViewId {
         LOGIN("/view/login.fxml"),
-        MAIN_GUI("/view/maingui.fxml");
+        MAIN_GUI("/view/maingui.fxml"),
+        MAIN_PRODUCT("/view/main_producto.fxml"),
+        MAIN_CLIENT("/view/main_cliente.fxml"),
+        MAIN_SALE("/view/main_venta.fxml");
 
         private final String fxmlPath;
 
