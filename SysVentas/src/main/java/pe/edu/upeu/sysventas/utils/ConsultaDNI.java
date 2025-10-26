@@ -9,7 +9,7 @@ import pe.edu.upeu.sysventas.dto.PersonaDto;
 
 import java.io.IOException;
 
-public abstract class ConsultaDNI {
+public  class ConsultaDNI {
 
     public PersonaDto consultarDNI(String dni){
 
@@ -47,6 +47,13 @@ public abstract class ConsultaDNI {
             e.printStackTrace();
         }
         return personaDto;
+    }
+
+
+    public static void main(String[] args) {
+        ConsultaDNI p=new ConsultaDNI();
+      PersonaDto a=  p.consultarDNI("73454203");
+        System.out.println(a.toString());
     }
 
 }

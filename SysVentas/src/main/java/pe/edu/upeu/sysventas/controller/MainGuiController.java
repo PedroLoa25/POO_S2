@@ -4,18 +4,21 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
-import pe.edu.upeu.sysventas.components.ViewNavigator;
-import pe.edu.upeu.sysventas.dto.MenuMenuItemDto;
+import pe.edu.upeu.sysventas.dto.MenuMenuItenTO;
 import pe.edu.upeu.sysventas.dto.SessionManager;
 import pe.edu.upeu.sysventas.service.IMenuMenuItemDao;
 import pe.edu.upeu.sysventas.utils.UtilsX;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -24,7 +27,7 @@ import java.util.prefs.Preferences;
 @Controller
 public class MainGuiController {
     @Autowired
-    private ViewNavigator viewNavigator;
+    private ApplicationContext context;
     UtilsX util = new UtilsX();
 
     Preferences userPrefs = Preferences.userRoot();
@@ -35,11 +38,12 @@ public class MainGuiController {
 
     @FXML
     private TabPane tabPaneFx;
-    List<MenuMenuItemDto> lista;
+    List<MenuMenuItenTO> lista;
     @FXML
     private BorderPane bp;
     @FXML
     private MenuBar menuBarFx;
+    private Parent parent;
     Stage stage;
 
     @FXML
@@ -59,9 +63,21 @@ public class MainGuiController {
     ComboBox<String> comboBoxIdioma = new ComboBox<>(
             javafx.collections.FXCollections.observableArrayList(
                     "Español",
-                    "Ingles"
+                    "Ingles", "Frances"
             ) );
     CustomMenuItem customItemIdioma = new CustomMenuItem(comboBoxIdioma);
+
+    @FXML
+    public void initialize() {
+        Platform.runLater(() -> {
+            stage = (Stage) tabPaneFx.getScene().getWindow();
+            System.out.println("El título del stage es: " + stage.getTitle());
+        });
+        graficarMenus();
+        // Layout principal
+        bp.setCenter(tabPaneFx);
+    }
+
 
     class MenuListener{
         public void menuSelected(Event e){
@@ -85,28 +101,46 @@ public class MainGuiController {
             if (menuConfig.containsKey(id)) {
                 String[] cfg = menuConfig.get(id);
                 if(cfg[2].equals("S") ){
-                    redireccionar(id);
+                    redireccionar(cfg[0]);
                 }else {
-                    abrirTabConFXML(id, cfg[1]);
+                    abrirTabConFXML(cfg[0], cfg[1]);
                 }
             }
         }
 
-        private void abrirTabConFXML(String viewKey, String tituloTab) {
-            Tab newTab = viewNavigator.createRegisteredTab(viewKey, tituloTab, true);
-            tabPaneFx.getTabs().clear(); // si quieres siempre limpiar
-            tabPaneFx.getTabs().add(newTab);
+        private void abrirTabConFXML(String fxmlPath, String tituloTab) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+                loader.setControllerFactory(context::getBean); // Inyección con Spring
+                Parent root = loader.load();
+                ScrollPane scrollPane = new ScrollPane(root);
+                scrollPane.setFitToWidth(true);
+                scrollPane.setFitToHeight(true);
+                Tab newTab = new Tab(tituloTab, scrollPane);
+                tabPaneFx.getTabs().clear(); // si quieres siempre limpiar
+                tabPaneFx.getTabs().add(newTab);
+            } catch (IOException e) {
+                throw new RuntimeException("Error al cargar FXML: " + fxmlPath, e);
+            }
         }
 
 
-        private void redireccionar(String viewKey){
+        private void redireccionar(String fxmlPath){
             tabPaneFx.getTabs().clear();
-            viewNavigator.setRegisteredScene(viewKey, stage);
-            stage.sizeToScene();
-            stage.centerOnScreen();
-            stage.setTitle("SysVentas SysCenterLife");
-            stage.setResizable(false);
-            stage.show();
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlPath));
+                fxmlLoader.setControllerFactory(context::getBean);
+                parent= fxmlLoader.load();
+                Scene scene = new Scene(parent);
+                stage.sizeToScene();
+                stage.setScene(scene);
+                stage.centerOnScreen();
+                stage.setTitle("SysVentas SysCenterLife");
+                stage.setResizable(false);
+                stage.show();
+            }catch (Exception ex){
+                throw new RuntimeException(ex);
+            }
         }
     }
 
@@ -133,10 +167,10 @@ public class MainGuiController {
         }
     }
 
-    public int[] contarMenuMunuItem(List<MenuMenuItemDto> data) {
+    public int[] contarMenuMunuItem(List<MenuMenuItenTO> data) {
         int menui = 0, menuitem = 0;
         String menuN = "";
-        for (MenuMenuItemDto mmi : data) {
+        for (MenuMenuItenTO mmi : data) {
             if (!mmi.getMenunombre().equals(menuN)) {
                 menuN = mmi.getMenunombre();
                 menui++;
@@ -148,14 +182,13 @@ public class MainGuiController {
         return new int[]{menui, menuitem};
     }
 
-    private List<MenuMenuItemDto> listaAccesos() {
+    private List<MenuMenuItenTO> listaAccesos() {
         myresources = util.detectLanguage(userPrefs.get("IDIOMAX", "es"));
         return mmiDao.listaAccesos(SessionManager.getInstance().getUserPerfil(),
                 myresources);
     }
     private void graficarMenus(){
         lista = listaAccesos();
-        lista.forEach(m -> viewNavigator.register(m.getIdNombreObj(), m.getRutaFile()));
         int[] mmi = contarMenuMunuItem(lista);
         Menu[] menu = new Menu[mmi[0]];
         MenuItem[] menuItem = new MenuItem[mmi[1]];
@@ -165,14 +198,14 @@ public class MainGuiController {
         String menuN = "";
         int menui = 0, menuitem = 0;
         char conti = 'N';
-        for (MenuMenuItemDto mmix : lista) {
+        for (MenuMenuItenTO mmix : lista) {
             if (!mmix.getMenunombre().equals(menuN)) {
                 menu[menui] = new Menu(mmix.getMenunombre());
                 menu[menui].setId("m" + mmix.getIdNombreObj());
                 menu[menui].setOnShowing(m::menuSelected);
                 if (!mmix.getMenuitemnombre().equals("")) {
                     menuItem[menuitem] = new MenuItem(mmix.getMenuitemnombre());
-                    menuItem[menuitem].setId(mmix.getIdNombreObj());
+                    menuItem[menuitem].setId("mi" + mmix.getIdNombreObj());
                     menuItem[menuitem].setOnAction(d::handle);
                     menu[menui].getItems().add(menuItem[menuitem]);
                     menuitem++;
@@ -187,7 +220,7 @@ public class MainGuiController {
             if (!mmix.getMenuitemnombre().equals("") &&
                     mmix.getMenunombre().equals(menuN) && conti == 'S') {
                 menuItem[menuitem] = new MenuItem(mmix.getMenuitemnombre());
-                menuItem[menuitem].setId(mmix.getIdNombreObj());
+                menuItem[menuitem].setId("mi" + mmix.getIdNombreObj());
                 menuItem[menuitem].setOnAction(d::handle);
                 menu[menui - 1].getItems().add(menuItem[menuitem]);
                 menuitem++;
@@ -212,9 +245,8 @@ public class MainGuiController {
         String idiomaSeleccionado =
                 comboBoxIdioma.getSelectionModel().getSelectedItem();
         switch (idiomaSeleccionado) {
-            case "Español":
-                userPrefs.put("IDIOMAX", "es");
-                break;
+            case "Español": userPrefs.put("IDIOMAX", "es"); break;
+            case "Frances": userPrefs.put("IDIOMAX", "fr"); break;
             case "Ingles":
                 userPrefs.put("IDIOMAX", "en");
                 break;
@@ -224,14 +256,4 @@ public class MainGuiController {
         graficarMenus();
     }
 
-    @FXML
-    public void initialize() {
-        Platform.runLater(() -> {
-            stage = (Stage) tabPaneFx.getScene().getWindow();
-            System.out.println("El título del stage es: " + stage.getTitle());
-        });
-        graficarMenus();
-        // Layout principal
-        bp.setCenter(tabPaneFx);
-    }
 }

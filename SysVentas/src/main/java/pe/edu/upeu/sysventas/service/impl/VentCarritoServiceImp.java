@@ -4,32 +4,33 @@ package pe.edu.upeu.sysventas.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pe.edu.upeu.sysventas.model.VentaCarrito;
+import pe.edu.upeu.sysventas.model.VentCarrito;
 import pe.edu.upeu.sysventas.repository.ICrudGenericRepository;
-import pe.edu.upeu.sysventas.repository.VentaCarritoRepository;
-import pe.edu.upeu.sysventas.service.IVentaCarritoService;
+import pe.edu.upeu.sysventas.repository.VentCarritoRepository;
+import pe.edu.upeu.sysventas.service.IVentCarritoService;
 
 import java.util.List;
 
 @RequiredArgsConstructor
 @Service
-public class VentCarritoServiceImp extends CrudGenericServiceImp<VentaCarrito, Long> implements IVentaCarritoService {
+public class VentCarritoServiceImp extends CrudGenericServiceImp<VentCarrito, Long> implements IVentCarritoService {
 
-    private final VentaCarritoRepository ventaCarritoRepository;
+    private final VentCarritoRepository carritoRepository;
 
     @Override
-    protected ICrudGenericRepository<VentaCarrito, Long> getRepo() {
-        return ventaCarritoRepository;
+    protected ICrudGenericRepository<VentCarrito, Long> getRepo() {
+        return carritoRepository;
     }
 
     @Override
-    public List<VentaCarrito> listaCarritoCliente(String dni) {
-        return ventaCarritoRepository.listaCarritoCliente(dni);
+    public List<VentCarrito> listaCarritoCliente(String dni) {
+        return carritoRepository.listaCarritoCliente(dni);
     }
 
     @Transactional
     @Override
     public void deleteCarAll(String dniruc) {
-        ventaCarritoRepository.deleteByDniruc(dniruc);
+        carritoRepository.deleteByDniruc(dniruc);
     }
+
 }

@@ -5,6 +5,7 @@ import pe.edu.upeu.sysventas.model.Categoria;
 
 import java.util.List;
 
-public interface ICategoriaService extends ICrudGenericService<Categoria, Long> {
+public interface ICategoriaService extends ICrudGenericService<Categoria,Long>{
+
     List<ComboBoxOption> listarCombobox();
 }

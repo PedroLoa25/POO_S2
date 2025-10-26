@@ -55,7 +55,8 @@
                                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                     </rowConstraints>
                                     <children>
-                                        <Label alignment="CENTER" prefHeight="18.0" prefWidth="391.0" text="Formulario de Registro" textAlignment="CENTER" GridPane.columnSpan="4" GridPane.halignment="CENTER">
+                                        <Label alignment="CENTER" prefHeight="18.0" prefWidth="391.0" text="Formulario de
+Registro" textAlignment="CENTER" GridPane.columnSpan="4" GridPane.halignment="CENTER">
                                             <font>
                                                 <Font name="System Bold" size="12.0" />
                                             </font>
@@ -159,7 +160,8 @@
                                                 <Insets bottom="5.0" top="5.0" />
                                             </GridPane.margin>
                                         </Button>
-                                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="btn, btn-lg, btn-danger" text="Cancelar" GridPane.columnIndex="2" GridPane.rowIndex="8">
+                                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="btn,
+btn-lg, btn-danger" text="Cancelar" GridPane.columnIndex="2" GridPane.rowIndex="8">
                                             <GridPane.margin>
                                                 <Insets bottom="5.0" left="5.0" top="5.0" />
                                             </GridPane.margin>

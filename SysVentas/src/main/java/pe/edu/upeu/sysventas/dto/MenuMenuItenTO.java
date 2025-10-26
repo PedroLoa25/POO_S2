@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class MenuMenuItemDto {
+public class MenuMenuItenTO {
     String idNombreObj, rutaFile, menunombre, menuitemnombre;
     String nombreTab, tipoTab;
 }

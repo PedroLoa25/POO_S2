@@ -19,4 +19,5 @@ public class UsuarioServiceImp extends CrudGenericServiceImp<Usuario, Long> impl
     public Usuario loginUsuario(String user, String clave) {
         return usuarioRepository.loginUsuario(user, clave);
     }
+
 }

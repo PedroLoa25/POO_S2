@@ -20,7 +20,6 @@ public class MarcaServiceImp extends CrudGenericServiceImp<Marca, Long> implemen
     protected ICrudGenericRepository<Marca, Long> getRepo() {
         return marcaRepository;
     }
-
     @Override
     public List<ComboBoxOption> listarCombobox() {
         List<ComboBoxOption> listar=new ArrayList<>();
@@ -33,4 +32,5 @@ public class MarcaServiceImp extends CrudGenericServiceImp<Marca, Long> implemen
         }
         return listar;
     }
+
 }

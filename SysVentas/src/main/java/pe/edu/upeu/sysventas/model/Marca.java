@@ -1,10 +1,7 @@
 package pe.edu.upeu.sysventas.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Builder
 @NoArgsConstructor
@@ -17,6 +14,6 @@ public class Marca {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_marca")
     private Long idMarca;
-    @Column(nullable = false, length = 100)
+    @Column(name = "nombre", nullable = false, length = 100)
     private String nombre;
 }

@@ -56,7 +56,7 @@
                         <Insets />
                     </opaqueInsets>
                 </AnchorPane>
-                <AnchorPane layoutY="65.0" style="-fx-border-color: #b5abd1; -fx-borderradius: 2;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                <AnchorPane layoutY="65.0" style="-fx-border-color: #b5abd1; -fx-border-radius: 2;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                     <children>
                         <Label layoutX="25.0" layoutY="34.0" text="Clave:" textFill="#b5abd1"
                         />
@@ -68,7 +68,7 @@
                     </padding>
                 </AnchorPane>
             </children></AnchorPane>
-        <AnchorPane layoutX="5.0" layoutY="360.0" prefHeight="60.0" style="-fx-backgroundcolor: yellow;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+        <AnchorPane layoutX="5.0" layoutY="360.0" prefHeight="60.0" style="-fx-background-color: yellow;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
                     AnchorPane.topAnchor="360.0">
             <children>
                 <GridPane layoutX="14.0" layoutY="3.0" AnchorPane.bottomAnchor="0.0"
@@ -82,7 +82,7 @@
                     </rowConstraints>
                     <children>
                         <Button fx:id="btnIngresar" maxHeight="1.7976931348623157E308"
-                                maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#login" style="-fxbackground-color: #43bb73;" text="Ingresar">
+                                maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#login" style="-fx-background-color: #43bb73;" text="Ingresar">
                             <GridPane.margin>
                                 <Insets right="0.5" />
                             </GridPane.margin>

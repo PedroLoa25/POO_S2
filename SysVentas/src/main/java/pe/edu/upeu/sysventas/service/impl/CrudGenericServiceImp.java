@@ -10,17 +10,17 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Service
-public abstract class CrudGenericServiceImp<T, ID> implements ICrudGenericService<T, ID> {
-    protected abstract ICrudGenericRepository<T, ID> getRepo();
+public abstract class CrudGenericServiceImp<T,ID> implements ICrudGenericService<T,ID> {
+    protected abstract ICrudGenericRepository<T,ID> getRepo();
 
     @Override
-    public T save(T t){
+    public T save(T t) {
         return getRepo().save(t);
     }
 
     @Override
     public T update(ID id, T t) {
-        getRepo().findById(id).orElseThrow(() -> new ModelNotFoundException("ID NOT FOUND" + id));
+        getRepo().findById(id).orElseThrow(()->new ModelNotFoundException("ID NOT FOUND"+id));
         return getRepo().save(t);
     }
 
@@ -31,20 +31,19 @@ public abstract class CrudGenericServiceImp<T, ID> implements ICrudGenericServic
 
     @Override
     public T findById(ID id) {
-        return getRepo().findById(id).orElseThrow(() -> new ModelNotFoundException("ID NOT FOUND" + id));
+        return getRepo().findById(id).orElseThrow(()->new ModelNotFoundException("ID NOT FOUND"+id));
     }
 
     @Override
-    public void delete(ID id) {
-        getRepo().deleteById(id);
+    public void delete(T t) {
+        getRepo().delete(t);
     }
 
-    /*@Override
+    @Override
     public void deleteById(ID id) {
         if(!getRepo().existsById(id)){
-            throw new ModelNotFoundException("ID NOT FOUND" + id);
+            throw new ModelNotFoundException("ID NOT FOUND"+id);
         }
         getRepo().deleteById(id);
-        //getRepo().findById(id).orElseThrow(() -> new ModelNotFoundException("ID NOT FOUND" + id));
-    }*/
+    }
 }

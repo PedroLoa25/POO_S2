@@ -14,7 +14,6 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import lombok.Builder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import pe.edu.upeu.sysventas.components.ColumnInfo;
@@ -36,8 +35,8 @@ import java.util.stream.Collectors;
 public class ProductoController {
     @FXML
     TextField txtNombreProducto, txtPUnit,
-            txtPUnitOld, txtUtilidad,
-            txtStock, txtStockOld, txtFiltroDato;
+            txtPUnitOld, txtUtilidad, txtStock, txtStockOld,
+            txtFiltroDato;
     @FXML
     ComboBox<ComboBoxOption> cbxMarca;
     @FXML
@@ -50,19 +49,22 @@ public class ProductoController {
     Label lbnMsg, idPrueba;
     @FXML
     private AnchorPane miContenedor;
-
     Stage stage;
 
     @Autowired
     IMarcaService ms;
+
     @Autowired
     ICategoriaService cs;
+
     @Autowired
     ProductoIService ps;
+
     @Autowired
     IUnidadMedidaService ums;
 
     private Validator validator;
+
     ObservableList<Producto> listarProducto;
     Producto formulario;
     Long idProductoCE=0L;
@@ -114,6 +116,7 @@ public class ProductoController {
         }
     }
 
+
     @FXML
     public void initialize() {
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2000),
@@ -128,6 +131,7 @@ public class ProductoController {
                 }));
         timeline.setCycleCount(1);
         timeline.play();
+
         cbxMarca.getItems().addAll(ms.listarCombobox());
         cbxMarca.setOnAction(event -> {
             ComboBoxOption selectedProduct =
@@ -164,8 +168,10 @@ public class ProductoController {
         });
         new ComboBoxAutoComplete<>(cbxUnidMedida);
 
+
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
+
         TableViewHelper<Producto> tableViewHelper = new TableViewHelper<>();
         LinkedHashMap<String, ColumnInfo> columns = new LinkedHashMap<>();
         columns.put("ID Pro.", new ColumnInfo("idProducto", 60.0));
@@ -179,23 +185,25 @@ public class ProductoController {
             System.out.println("Actualizar: " + producto);
             editForm(producto);
         };
-        Consumer<Producto> deleteAction = (Producto producto) ->
-        {
+        Consumer<Producto> deleteAction = (Producto producto) -> {
             System.out.println("Actualizar: " + producto);
             ps.delete(producto.getIdProducto());
-            double with = stage.getWidth() / 1.5;
-            double h = stage.getHeight() / 2;
+            double with=stage.getWidth()/1.5;
+            double h=stage.getHeight()/2;
             Toast.showToast(stage, "Se eliminó correctamente!!", 2000, with,
                     h);
             listar();
         };
 
         tableViewHelper.addColumnsInOrderWithSize(tableView,
-                columns, updateAction, deleteAction);
+                columns,updateAction, deleteAction );
+
         tableView.setTableMenuButtonVisible(true);
+
 
         listar();
     }
+
 
     public void limpiarError() {
         List<Control> controles = List.of(
@@ -205,6 +213,7 @@ public class ProductoController {
         );
         controles.forEach(c -> c.getStyleClass().remove("text-field-error"));
     }
+
 
     public void clearForm() {
         txtNombreProducto.clear();
@@ -262,6 +271,8 @@ public class ProductoController {
         }
     }
 
+
+
     private void mostrarErroresValidacion(List<ConstraintViolation<Producto>> violaciones) {
         limpiarError();
         //Mantiene el orden de los campos del formulario
@@ -275,6 +286,7 @@ public class ProductoController {
         campos.put("marca", cbxMarca);
         campos.put("categoria", cbxCategoria);
         campos.put("unidadMedida", cbxUnidMedida);
+
         //Guarda los errores siguiendo el orden del formulario
         LinkedHashMap<String, String> erroresOrdenados = new LinkedHashMap<>();
         final Control[] primerControlConError = {null};
@@ -300,6 +312,7 @@ public class ProductoController {
             var primerError = erroresOrdenados.entrySet().iterator().next();
             lbnMsg.setText(primerError.getValue());
             lbnMsg.setStyle("-fx-text-fill: red; -fx-font-size: 16px;");
+
             //Enfocar el primer campo con error
             if (primerControlConError[0] != null) {
                 Control finalPrimerControl = primerControlConError[0];
@@ -307,6 +320,42 @@ public class ProductoController {
             }
         }
     }
+
+
+    @FXML
+    public void validarFormulario() {
+        formulario = new Producto();
+        formulario.setNombre(txtNombreProducto.getText());
+        formulario.setPu(parseDoubleSafe(txtPUnit.getText()));
+        formulario.setPuOld(parseDoubleSafe(txtPUnitOld.getText()));
+        formulario.setUtilidad(parseDoubleSafe(txtUtilidad.getText()));
+        formulario.setStock(parseDoubleSafe(txtStock.getText()));
+        formulario.setStockOld(parseDoubleSafe(txtStockOld.getText()));
+        String idxM=cbxMarca.getSelectionModel().getSelectedItem()==null?"0":cbxMarca.getSelectionModel().getSelectedItem().getKey();
+        formulario.setMarca(idxM=="0"?null:ms.findById(Long.parseLong(idxM)));
+        String idxC=cbxCategoria.getSelectionModel().getSelectedItem()==null?"0":cbxCategoria.getSelectionModel().getSelectedItem().getKey();
+        formulario.setCategoria(idxC=="0"?null:cs.findById(Long.parseLong(idxC)));
+        String idxUM=cbxUnidMedida.getSelectionModel().getSelectedItem()==null?"0":cbxUnidMedida.getSelectionModel().getSelectedItem().getKey();
+        formulario.setUnidadMedida(idxUM=="0"?null:ums.findById(Long.parseLong(idxUM)));
+
+        Set<ConstraintViolation<Producto>> violaciones = validator.validate(formulario);
+
+        List<ConstraintViolation<Producto>> violacionesOrdenadas = violaciones.stream()
+                .sorted(Comparator.comparing(v -> v.getPropertyPath().toString()))
+                .toList();
+
+
+        if (violacionesOrdenadas.isEmpty()) {
+            procesarFormulario();
+        } else {
+            mostrarErroresValidacion(violacionesOrdenadas);
+        }
+
+
+    }
+
+
+
 
     private void procesarFormulario() {
         lbnMsg.setText("Formulario válido");
@@ -326,32 +375,4 @@ public class ProductoController {
         listar();
     }
 
-    @FXML
-    public void validarFormulario() {
-        formulario = new Producto();
-        formulario.setNombre(txtNombreProducto.getText());
-        formulario.setPu(parseDoubleSafe(txtPUnit.getText()));
-        formulario.setPuOld(parseDoubleSafe(txtPUnitOld.getText()));
-        formulario.setUtilidad(parseDoubleSafe(txtUtilidad.getText()));
-        formulario.setStock(parseDoubleSafe(txtStock.getText()));
-        formulario.setStockOld(parseDoubleSafe(txtStockOld.getText()));
-        String
-                idxM=cbxMarca.getSelectionModel().getSelectedItem()==null?"0":cbxMarca.getSelectionModel().getSelectedItem().getKey();
-        formulario.setMarca(idxM=="0"?null:ms.findById(Long.parseLong(idxM)));
-        String
-                idxC=cbxCategoria.getSelectionModel().getSelectedItem()==null?"0":cbxCategoria.getSelectionModel().getSelectedItem().getKey();
-        formulario.setCategoria(idxC=="0"?null:cs.findById(Long.parseLong(idxC)));
-        String
-                idxUM=cbxUnidMedida.getSelectionModel().getSelectedItem()==null?"0":cbxUnidMedida.getSelectionModel().getSelectedItem().getKey();
-        formulario.setUnidadMedida(idxUM=="0"?null:ums.findById(Long.parseLong(idxUM)));
-        Set<ConstraintViolation<Producto>> violaciones = validator.validate(formulario);
-        List<ConstraintViolation<Producto>> violacionesOrdenadas = violaciones.stream()
-                .sorted(Comparator.comparing(v -> v.getPropertyPath().toString()))
-                .toList();
-        if (violacionesOrdenadas.isEmpty()) {
-            procesarFormulario();
-        } else {
-            mostrarErroresValidacion(violacionesOrdenadas);
-        }
-    }
 }

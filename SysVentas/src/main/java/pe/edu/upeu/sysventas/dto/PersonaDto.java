@@ -9,11 +9,8 @@ import lombok.NoArgsConstructor;
 @Data
 public class PersonaDto {
     String dni, nombre, apellidoPaterno, apellidoMaterno;
-
-    /*
     @Override
     public String toString(){
         return dni+" "+nombre+" "+apellidoPaterno+" "+apellidoMaterno;
     }
-    */
 }

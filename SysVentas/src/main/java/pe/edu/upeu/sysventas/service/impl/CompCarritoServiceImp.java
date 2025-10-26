@@ -2,19 +2,19 @@ package pe.edu.upeu.sysventas.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import pe.edu.upeu.sysventas.model.CompraCarrito;
-import pe.edu.upeu.sysventas.repository.CompraCarritoRepository;
+import pe.edu.upeu.sysventas.model.CompCarrito;
+import pe.edu.upeu.sysventas.repository.CompCarritoRepository;
 import pe.edu.upeu.sysventas.repository.ICrudGenericRepository;
-import pe.edu.upeu.sysventas.service.ICompraCarritoService;
+import pe.edu.upeu.sysventas.service.ICompCarritoService;
 
 @RequiredArgsConstructor
 @Service
-public class CompCarritoServiceImp extends CrudGenericServiceImp<CompraCarrito,Long> implements ICompraCarritoService {
+public class CompCarritoServiceImp extends CrudGenericServiceImp<CompCarrito,Long> implements ICompCarritoService {
 
-    private final CompraCarritoRepository compCarritoRepository;
+    private final CompCarritoRepository compCarritoRepository;
 
     @Override
-    protected ICrudGenericRepository<CompraCarrito, Long> getRepo() {
+    protected ICrudGenericRepository<CompCarrito, Long> getRepo() {
         return compCarritoRepository;
     }
 }

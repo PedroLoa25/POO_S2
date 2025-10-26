@@ -20,13 +20,12 @@ import java.sql.SQLException;
 import java.util.HashMap;
 
 @RequiredArgsConstructor
- @Service
+@Service
 public class VentaServiceImp extends CrudGenericServiceImp<Venta, Long> implements IVentaService {
-
-    private final VentaRepository ventaRepository;
-
     @Autowired
     private DataSource dataSource;
+
+    private final VentaRepository ventaRepository;
 
     @Override
     protected ICrudGenericRepository<Venta, Long> getRepo() {
@@ -44,11 +43,13 @@ public class VentaServiceImp extends CrudGenericServiceImp<Venta, Long> implemen
         return CAMINO.toFile();
     }
 
+
     @Override
-    public JasperPrint runReport(Long idv) throws JRException, SQLException {
+    public JasperPrint runReport(Long idv) throws JRException, SQLException
+    {
         // Verificar si la venta existe
         if (!ventaRepository.existsById(idv)) {
-            throw new IllegalArgumentException("La venta con id " + idv + "no existe");
+            throw new IllegalArgumentException("La venta con id " + idv + " no existe");
         }
         HashMap<String, Object> param = new HashMap<>();
         // Obtener ruta de la imagen

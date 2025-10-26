@@ -32,4 +32,5 @@ public class UnidadMedidaServiceImp extends CrudGenericServiceImp<UnidadMedida, 
         }
         return listar;
     }
+
 }
