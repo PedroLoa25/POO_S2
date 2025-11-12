@@ -16,6 +16,7 @@ import javax.sql.DataSource;
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.HashMap;
 
@@ -63,6 +64,8 @@ public class VentaServiceImp extends CrudGenericServiceImp<Venta, Long> implemen
         JasperDesign jdesign = JRXmlLoader.load(getFile("comprobante.jrxml"));
         JasperReport jreport = JasperCompileManager.compileReport(jdesign);
         // Llenar el informe
-        return JasperFillManager.fillReport(jreport, param, dataSource.getConnection());
+        try(Connection conn = dataSource.getConnection()){
+            return JasperFillManager.fillReport(jreport, param, conn);
+        }
     }
 }
