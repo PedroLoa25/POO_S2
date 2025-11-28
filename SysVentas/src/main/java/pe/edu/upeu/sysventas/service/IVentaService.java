@@ -10,4 +10,5 @@ import java.sql.SQLException;
 public interface IVentaService extends ICrudGenericService<Venta,Long>{
     File getFile(String filex);
     JasperPrint runReport(Long idv) throws JRException, SQLException;
+    JasperPrint runReportVentas(String fechaI, String fechaF) throws JRException, SQLException;
 }
